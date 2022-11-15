@@ -1,0 +1,16 @@
+{
+    "intrinsic":
+        [1389.09, 0, 946.603,
+            0, 1389.7, 544.089,
+            0, 0, 1],
+    "distCoeffs":[0, 0, 0, 0, 0],
+    "camera_center": [0.15, 0, 0.4],
+    "screen_point": [-0.15, 0, 0.4],
+    "screen_normal": [0.15, 0, -0.4],
+    "SUT_resolution": [201,201],
+    "SUT_num": 128,
+    "SUT_X_range": [-0.02, 0.02],
+    "SUT_Y_range": [-0.02, 0.02],
+    "x_grad_limit": [-0.375,0.25],
+    "y_grad_limit": [-0.375,0.25]
+}
