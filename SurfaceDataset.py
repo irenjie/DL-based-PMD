@@ -163,66 +163,6 @@ class SurfaceDataset(Dataset):
     def __len__(self):
         return len(self.refer_slope)
 
-    def test_surface(self):
-        X = np.linspace(self.SUT_X_range[0], self.SUT_X_range[1], self.SUT_resolution[0]) * 1000
-        Y = np.linspace(self.SUT_Y_range[0], self.SUT_Y_range[1], self.SUT_resolution[1]) * 1000
-        X1, Y1 = np.meshgrid(X, Y)
-        X1 = X1.T
-        Y1 = Y1.T
-        fig = plt.figure()
-        ax3d = fig.add_subplot(projection='3d')
-
-        ax3d.plot_surface(X1, Y1, self.SUT[0], cmap=mycmp)
-
-        ax3d.set_xlabel('X(mm)')
-        ax3d.set_ylabel('Y(mm)')
-        ax3d.set_zlabel('Z(mm)')
-        plt.show(block=True)
-
-    def test_system(self):
-        # X = np.linspace(self.SUT_X_range[0], self.SUT_X_range[1], self.SUT_resolution[0]) * 1000
-        # Y = np.linspace(self.SUT_Y_range[0], self.SUT_Y_range[1], self.SUT_resolution[1]) * 1000
-        # X1, Y1 = np.meshgrid(X, Y)
-        # X1 = X1.T
-        # Y1 = Y1.T
-        fig = plt.figure()
-        ax3d = fig.add_subplot(projection='3d')
-
-        # 画参考平面
-        rp = self.refer_surface[0] * 1000
-        Xr = rp[..., 0]
-        Yr = rp[..., 1]
-        Zr = rp[..., 2]
-        ax3d.plot_surface(Xr, Yr, Zr, color = 'red')
-
-        # 画屏幕
-        Xs = np.linspace(-0.35, 0.05, 40) * 0.5
-        Ys = np.linspace(0.2, -0.2, 40) * 0.5
-        X1, Y1 = np.meshgrid(Xs, Ys)
-        X1 = X1.T
-        Y1 = Y1.T
-        Zs = self.screen_normal[0] * (X1-self.screen_point[0]) + self.screen_normal[1] * (Y1-self.screen_point[1]) /\
-             (-self.screen_normal[2]) + self.screen_point[2]
-        X1 *= 1000
-        Y1 *= 1000
-        Zs *= 1000
-        ax3d.plot_surface(X1, Y1, Zs,color = 'blue')
-
-        # 画相机
-        x = []
-        y = []
-        z = []
-        x.append(self.camera_center[0]*1000)
-        y.append(self.camera_center[1]*1000)
-        z.append(self.camera_center[2]*1000)
-        ax3d.scatter(x,y,z,color = 'green', s =50, marker = 's')
-
-        # ax3d.set_zticks(np.arange(-1, 1.5, 0.5))
-        ax3d.set_xlabel('X(mm)')
-        ax3d.set_ylabel('Y(mm)')
-        ax3d.set_zlabel('Z(mm)')
-        plt.show(block=True)
-
 
 def loadDataset(is_test=False):
     f = open('cfg.json')
